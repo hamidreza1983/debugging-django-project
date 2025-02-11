@@ -1,16 +1,16 @@
 from django.db import models
-from team.models import team
-from blogs.models import category
+from team.models import Team
+from blogs.models import Category
 
 
 # Create your models here.
 
-class portfolio(models.Model):
-    agent = models.ForeignKey(team,on_delete=models.CASCADE)
+class Portfolio(models.Model):
+    agent = models.ForeignKey(Team,on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     desc1 = models.TextField()
     desc2 = models.TextField()
-    category = models.ManyToManyField(category)
+    category = models.ManyToManyField(Category)
     img1 = models.ImageField(upload_to='portfolio', default='default.png')
     img2 = models.ImageField(upload_to='portfolio', default='default.png')
     img3 = models.ImageField(upload_to='portfolio', default='default.png')

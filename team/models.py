@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class skill(models.Model):
+class Skill(models.Model):
     skill = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
 
@@ -11,10 +11,10 @@ class skill(models.Model):
         return self.skill
     
 
-class team(models.Model):
+class Team(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='team', default='default.png')
-    skill = models.ManyToManyField(skill)
+    skill = models.ManyToManyField(Skill)
     content = models.TextField()
     status = models.BooleanField(default=False)
 

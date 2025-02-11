@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import blog, comments, reply, category, tag
+from .models import Blog, Comments, Reply, Category, Tag
 
 # Register your models here.
-admin.site.register(blog)
-admin.site.register(comments)
-admin.site.register(reply)
-admin.site.register(category)
-admin.site.register(tag)
+admin.site.register(Blog)
+admin.site.register(Comments)
+admin.site.register(Reply)
+admin.site.register(Category)
+admin.site.register(Tag)

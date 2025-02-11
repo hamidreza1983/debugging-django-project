@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import testimonials,contactus
+from .models import Testimonials,Contactus
 
 # Register your models here.
 
-admin.site.register(testimonials)
-admin.site.register(contactus)
+admin.site.register(Testimonials)
+admin.site.register(Contactus)

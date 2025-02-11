@@ -4,7 +4,7 @@ from django.db import models
 
 
 
-class testimonials(models.Model):
+class Testimonials(models.Model):
     title = models.CharField(max_length=20)
     logo = models.ImageField(upload_to='testimonials', default='default.png')
     content = models.TextField()
@@ -21,7 +21,7 @@ class testimonials(models.Model):
 
 
 
-class contactus(models.Model):
+class Contactus(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     subject = models.CharField(max_length=100)

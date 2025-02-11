@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import skill, team
+from .models import Skill, Team
 
 # Register your models here.
 
-admin.site.register(skill)
-admin.site.register(team)
+admin.site.register(Skill)
+admin.site.register(Team)
