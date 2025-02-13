@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% block title %}Home{% endblock title %}
 {% block "content" %}
+{% load humanize %}
   <main class="main">
 
     <!-- About Section -->
@@ -112,43 +114,19 @@
 
       <div class="container">
         <div class="row gy-4 justify-content-center">
-
+          {% for service in services %}
           <div class="col-lg-3">
             <div class="services-item" data-aos="fade-up">
               <div class="services-icon">
                 <i class="bi bi-bullseye"></i>
               </div>
               <div>
-                <h3>Technology</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
+                <h3>{{service.title}}</h3>
+                <p>{{service.content}}</p>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-3">
-            <div class="services-item" data-aos="fade-up" data-aos-delay="100">
-              <div class="services-icon">
-                <i class="bi bi-command"></i>
-              </div>
-              <div>
-                <h3>Web Design</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3">
-            <div class="services-item" data-aos="fade-up" data-aos-delay="200">
-              <div class="services-icon">
-                <i class="bi bi-bar-chart"></i>
-              </div>
-              <div>
-                <h3>Branding</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
-              </div>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
       </div>
     </section><!-- /Services Section -->
@@ -218,89 +196,34 @@
       <div class="container">
 
         <div class="row gy-4">
+          {% for blog in blogs %}
           <div class="col-md-6 col-lg-4">
             <div class="post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="#" class="thumb d-block"><img src="{% static "assets/img/img_h_4.jpg" %}" alt="Image" class="img-fluid rounded"></a>
+              <a href="#" class="thumb d-block"><img src="{{blog.img1.url}}" alt="Image" class="img-fluid rounded"></a>
 
               <div class="post-content">
                 <div class="meta">
                   <a href="#" class="cat">Development</a> •
-                  <span class="date">July 20, 2020</span>
+                  <span class="date">{{blog.updated_at|date:"d F, Y"}}</span>
                 </div>
-                <h3><a href="#">There live the blind texts they live</a></h3>
+                <h3><a href="#">{{blog.title}}</a></h3>
                 <p>
-                  Far far away, behind the word mountains, far from the countries
-                  Vokalia and Consonantia, there live the blind texts.
+                  {{blog.content}}
                 </p>
 
                 <div class="d-flex author align-items-center">
                   <div class="pic">
-                    <img src="{% static "assets/img/team/team-3.jpg" %}" alt="Image" class="img-fluid rounded-circle">
+                    <img src="{{blog.agent.image.url}}" alt="Image" class="img-fluid rounded-circle">
                   </div>
                   <div class="author-name">
-                    <strong class="d-block">Winston Gold</strong>
-                    <span class="">Lead Product Designer</span>
+                    <strong class="d-block">{{blog.agent.name}}</strong>
+                    <span class="">{{blog.agent.skill.skill}}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-4">
-            <div class="post-entry" data-aos="fade-up" data-aos-delay="200">
-              <a href="#" class="thumb d-block"><img src="{% static "assets/img/img_h_2.jpg" %}" alt="Image" class="img-fluid rounded"></a>
-
-              <div class="post-content">
-                <div class="meta">
-                  <a href="#" class="cat">Development</a> •
-                  <span class="date">July 20, 2020</span>
-                </div>
-                <h3><a href="#">There live the blind texts they live</a></h3>
-                <p>
-                  Far far away, behind the word mountains, far from the countries
-                  Vokalia and Consonantia, there live the blind texts.
-                </p>
-
-                <div class="d-flex author align-items-center">
-                  <div class="pic">
-                    <img src="{% static "assets/img/team/team-2.jpg" %}" alt="Image" class="img-fluid rounded-circle">
-                  </div>
-                  <div class="author-name">
-                    <strong class="d-block">Winston Gold</strong>
-                    <span class="">Lead Product Designer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4">
-            <div class="post-entry" data-aos="fade-up" data-aos-delay="300">
-              <a href="#" class="thumb d-block"><img src="{% static "assets/img/img_h_3.jpg" %}" alt="Image" class="img-fluid rounded"></a>
-
-              <div class="post-content">
-                <div class="meta">
-                  <a href="#" class="cat">Development</a> •
-                  <span class="date">July 20, 2020</span>
-                </div>
-                <h3><a href="#">There live the blind texts they live</a></h3>
-                <p>
-                  Far far away, behind the word mountains, far from the countries
-                  Vokalia and Consonantia, there live the blind texts.
-                </p>
-
-                <div class="d-flex author align-items-center">
-                  <div class="pic">
-                    <img src="{% static "assets/img/team/team-1.jpg" %}" alt="Image" class="img-fluid rounded-circle">
-                  </div>
-                  <div class="author-name">
-                    <strong class="d-block">Winston Gold</strong>
-                    <span class="">Lead Product Designer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </section><!-- /Blog Posts Section -->
@@ -471,51 +394,19 @@
           </div>
           <div class="col-md-6 col-lg-6 ps-lg-5">
             <div class="row">
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="services-item" data-aos="fade-up" data-aos-delay="">
-                  <div class="services-icon">
-                    <i class="bi bi-search"></i>
-                  </div>
-                  <div>
-                    <h3>Square</h3>
-                    <p>Separated they live in Bookmarksgrove right at the coast</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="services-item" data-aos="fade-up" data-aos-delay="100">
-                  <div class="services-icon">
-                    <i class="bi bi-command"></i>
-                  </div>
-                  <div>
-                    <h3>Technology</h3>
-                    <p>Separated they live in Bookmarksgrove right at the coast</p>
-                  </div>
-                </div>
-              </div>
+              {% for service in services2 %}
               <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="services-item" data-aos="fade-up" data-aos-delay="200">
                   <div class="services-icon">
                     <i class="bi bi-grid"></i>
                   </div>
                   <div>
-                    <h3>Brilliant Ideas</h3>
-                    <p>Separated they live in Bookmarksgrove right at the coast</p>
+                    <h3>{{service.title}}</h3>
+                    <p>{{service.content}}</p>
                   </div>
                 </div>
               </div>
-
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="services-item" data-aos="fade-up" data-aos-delay="300">
-                  <div class="services-icon">
-                    <i class="bi bi-globe"></i>
-                  </div>
-                  <div>
-                    <h3>Blueprint</h3>
-                    <p>Separated they live in Bookmarksgrove right at the coast</p>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -702,51 +593,22 @@
                 }
               </script>
               <div class="swiper-wrapper">
+                {% for testimonial in testimonials %}
                 <div class="swiper-slide">
                   <div class="testimonial mx-auto">
                     <figure class="img-wrap">
-                      <img src="{% static "assets/img/testimonials/testimonials-1.jpg" %}" alt="Image" class="img-fluid">
+                      <img src="{{testimonial.logo.url}}" alt="Image" class="img-fluid">
                     </figure>
-                    <h3 class="name">Adam Aderson</h3>
+                    <h3 class="name">{{testimonial.title}}</h3>
                     <blockquote>
                       <p>
-                        “There live the blind texts. Separated they live in
-                        Bookmarksgrove right at the coast of the Semantics, a large
-                        language ocean.”
+                        {{testimonial.content}}
                       </p>
                     </blockquote>
+                    <a href={{testimonial.domain}}><h3 class="name">Site</h3></a>
                   </div>
                 </div>
-                <div class="swiper-slide">
-                  <div class="testimonial mx-auto">
-                    <figure class="img-wrap">
-                      <img src="{% static "assets/img/testimonials/testimonials-2.jpg" %}" alt="Image" class="img-fluid">
-                    </figure>
-                    <h3 class="name">Lukas Devlin</h3>
-                    <blockquote>
-                      <p>
-                        “There live the blind texts. Separated they live in
-                        Bookmarksgrove right at the coast of the Semantics, a large
-                        language ocean.”
-                      </p>
-                    </blockquote>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="testimonial mx-auto">
-                    <figure class="img-wrap">
-                      <img src="{% static "assets/img/testimonials/testimonials-3.jpg" %}" alt="Image" class="img-fluid">
-                    </figure>
-                    <h3 class="name">Kayla Bryant</h3>
-                    <blockquote>
-                      <p>
-                        “There live the blind texts. Separated they live in
-                        Bookmarksgrove right at the coast of the Semantics, a large
-                        language ocean.”
-                      </p>
-                    </blockquote>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
               <div class="swiper-pagination"></div>
             </div>
