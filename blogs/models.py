@@ -1,5 +1,6 @@
 from django.db import models
 from team.models import Team
+from accounts.models import Profile,User
 
 # Create your models here.
 
@@ -44,24 +45,24 @@ class Blog(models.Model):
 
 
 class Comments(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
+    email = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField()
-    post = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.blog.title
     
-
 class Reply(models.Model):
-    comment = models.ForeignKey(Comments, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    comment = models.ForeignKey(Comments,on_delete=models.CASCADE)
+    email = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField()
     status = models.BooleanField(default=False)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
-        return self.comment.blog.title
+        return self.comment.email.email
 
 
 

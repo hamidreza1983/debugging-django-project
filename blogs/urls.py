@@ -8,4 +8,5 @@ urlpatterns = [
     path('detail/<int:pk>', BlogDetailsView.as_view(), name="blogs_details"),
     path('category/<str:category>', BlogView.as_view(), name="blogs_category"),
     path('tag/<str:tag>', BlogView.as_view(), name="blogs_tag"),
+    path('reply/<int:id>',reply_comment,name='reply_comment'),
 ]
