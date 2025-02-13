@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Active Bootstrap Template</title>
+  <title>{% block title %}{% endblock title %}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -50,30 +50,28 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href={% url "root:home" %} class="active">Home</a></li>
+          <li><a href={% url "root:about" %}>About</a></li>
           <li><a href={% url "services:services" %}>Services</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href={% url "portfolio:portfolio" %}>Portfolio</a></li>
+          <li><a href={% url "teams:teams" %}>Team</a></li>
+          <li><a href={% url "blogs:blogs" %}>Blog</a></li>
+          <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              {% for cat in category %}
+              <li><a href={% url "blogs:blogs_category" category=cat.title %}>{{cat.title}}</a></li>
+              {% endfor %}
             </ul>
           </li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href={% url "root:contact" %}>Contact</a></li>
+          {% if request.user.is_authenticated %}
+          <a class="btn-getstarted" href={% url "accounts:edit_profile" id=request.user.id %}>{{request.user.email}}</a>
+          {% comment %} <a class="btn-getstarted" href={% url "accounts:edit_profile" id=request.user.id %}>editeprofile</a> {% endcomment %}
+          <a class="btn-getstarted" href={%url "accounts:logout"%}>Logout</a>
+          <a class="btn-getstarted" href={%url "accounts:change_password"%}>ChangePassword</a>
+          {% else %}
+          <a class="btn-getstarted" href={%url "accounts:login"%}>Login/Sinup</a>
+      {% endif %}
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -94,7 +92,7 @@
               right at the coast of the Semantics, a large language ocean.
             </p>
             <p class="mb-0">
-              <a href="#" class="btn-learn-more">Learn more</a>
+              <a href={% url "root:about" %} class="btn-learn-more">Learn more</a>
             </p>
           </div>
         </div>
@@ -108,12 +106,12 @@
             </ul>
             <ul class="list-unstyled float-start">
               <li><a href="#">Overview</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Services</a></li>
+              <li><a href={% url "root:about" %}>About Us</a></li>
+              <li><a href={% url "services:services" %}>Services</a></li>
             </ul>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 pl-lg-5">
+        {% comment %} <div class="col-md-6 col-lg-3 pl-lg-5">
           <div class="widget">
             <h3 class="widget-heading">Recent Posts</h3>
             <ul class="list-unstyled footer-blog-entry">
@@ -127,7 +125,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> {% endcomment %}
         <div class="col-md-6 col-lg-3 pl-lg-5">
           <div class="widget">
             <h3 class="widget-heading">Connect</h3>

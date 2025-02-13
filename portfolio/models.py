@@ -10,7 +10,7 @@ class Portfolio(models.Model):
     title = models.CharField(max_length=50)
     desc1 = models.TextField()
     desc2 = models.TextField()
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     img1 = models.ImageField(upload_to='portfolio', default='default.png')
     img2 = models.ImageField(upload_to='portfolio', default='default.png')
     img3 = models.ImageField(upload_to='portfolio', default='default.png')

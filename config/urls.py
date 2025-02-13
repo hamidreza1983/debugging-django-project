@@ -22,11 +22,11 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("root.urls")),
-    path('team', include("team.urls")),
-    path('services', include("services.urls")),
-    path('accounts', include("accounts.urls")),
-    path('portfolio', include("portfolio.urls")),
-    path('blogs', include("blogs.urls")),
+    path('team/', include("team.urls")),
+    path('services/', include("services.urls")),
+    path('accounts/', include("accounts.urls")),
+    path('portfolio/', include("portfolio.urls")),
+    path('blogs/', include("blogs.urls")),
 ]
 
 

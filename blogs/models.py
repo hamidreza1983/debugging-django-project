@@ -3,8 +3,6 @@ from team.models import Team
 
 # Create your models here.
 
-
-
 class Category(models.Model):
     title = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
@@ -26,7 +24,7 @@ class Blog(models.Model):
     desc1 = models.TextField()
     desc2 = models.TextField()
     desc3 = models.TextField()
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag)
     img1 = models.ImageField(upload_to='blog', default='default.png')
     img2 = models.ImageField(upload_to='blog', default='default.png')
@@ -39,6 +37,9 @@ class Blog(models.Model):
     
     def truncate_chars(self):
         return self.desc1[:20]
+    
+    class Meta:
+        ordering = ["-created_at"]
 
 
 
