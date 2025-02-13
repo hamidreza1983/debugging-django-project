@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "services",
     "team",
     "portfolio",
-    "blogs"
+    "blogs",
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
