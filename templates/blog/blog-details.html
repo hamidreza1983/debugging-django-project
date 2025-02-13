@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block "content" %}
+{% load humanize %}
   <main class="main">
 
     <!-- Page Title -->
@@ -35,8 +36,8 @@
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{object.agent.name}}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{object.updated_at|date:"d F, Y" }}</time></a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
                   </ul>
                 </div><!-- End meta top -->
@@ -68,14 +69,14 @@
                 <div class="meta-bottom">
                   <i class="bi bi-folder"></i>
                   <ul class="cats">
-                    <li><a href="#">Business</a></li>
+                    <li><a href="#">{{object.category.title}}</a></li>
                   </ul>
 
                   <i class="bi bi-tags"></i>
                   <ul class="tags">
-                    <li><a href="#">Creative</a></li>
-                    <li><a href="#">Tips</a></li>
-                    <li><a href="#">Marketing</a></li>
+                    {% for tag in object.tag.all %}
+                    <li><a href="#">{{tag.title}}</a></li>
+                    {% endfor %}
                   </ul>
                 </div><!-- End meta bottom -->
 
@@ -250,33 +251,12 @@
             <div class="recent-posts-widget widget-item">
 
               <h3 class="widget-title">Recent Posts</h3>
-
+              {% for blog in blogs %}
               <div class="post-item">
-                <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
+                <h4><a href={% url "blogs:blogs_details" pk=blog.id%}>{{blog.truncate_chars}}</a></h4>
+                <time datetime="2020-01-01">{{blog.updated_at|date:"d F, Y"}}</time>
               </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div><!-- End recent post item-->
-
-            </div><!--/Recent Posts Widget -->
+              {% endfor %}
 
             <!-- Tags Widget -->
             <div class="tags-widget widget-item">
@@ -284,7 +264,7 @@
               <h3 class="widget-title">Tags</h3>
               <ul>
                 {% for tag in object.tag.all %}
-                <li><a href="#">{{tag.title}}</a></li>
+                <li><a href={% url "blogs:blogs_tag" tag=tag.title %}>{{tag.title}}</a></li>
                 {% endfor %}
               </ul>
 
